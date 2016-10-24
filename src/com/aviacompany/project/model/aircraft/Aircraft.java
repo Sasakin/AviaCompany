@@ -1,12 +1,17 @@
 package com.aviacompany.project.model.aircraft;
 
 
+import com.aviacompany.project.model.passenger.Place;
+
 public interface Aircraft {
 
-    String getRoute();
+    public String getRoute();
 
-    void setRoute(String route);
+    public void setRoute(String route);   // задать маршрут
 
-    String getTypeTrain();
+    public void loadPlace(Place place);  // загрузить самолет грузом или пасажирами
+                                         // предполагается что груз или пасажир прикреплен к месту, а не наоборот
+
+    public  String getTypeAircraft();
 
 }

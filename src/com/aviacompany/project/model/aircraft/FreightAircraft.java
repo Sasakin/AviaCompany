@@ -6,19 +6,30 @@ import com.aviacompany.project.model.passenger.Place;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class FreightAircraft implements Aircraft {
+public abstract   class FreightAircraft implements Comparable<FreightAircraft> {
     protected int countPlace;
     protected int countBusyPlace;
-    protected double allMassBaggege;
-    protected int maxDistance = 0;
+    protected double maxMassBaggage;
+    protected double allMassBaggage;
+    protected Integer maxDistance;
     protected ArrayList<Place> listPlace;
+    protected int fuelConsumptionVolume;          // объем потребления топлива
+    protected static final String TYPE_AIRCRAFT = "Freight";   // тип - грузовой
 
-    public double getAllMassBaggege() {
-        return allMassBaggege;
+    public int getFuelConsumptionVolume() {
+        return fuelConsumptionVolume;
     }
 
-    public void setAllMassBaggege(double allMassBaggege) {
-        this.allMassBaggege = allMassBaggege;
+    public double getMaxMassBaggage() {
+        return maxMassBaggage;
+    }
+
+    public double getAllMassBaggage() {
+        return allMassBaggage;
+    }
+
+    public void setAllMassBaggege(double allMassBaggage) {
+        this.allMassBaggage = allMassBaggage;
     }
 
     public int getCountBusyPlace() {
@@ -26,14 +37,13 @@ public abstract class FreightAircraft implements Aircraft {
     }
 
     public void setCountBusyPlace(int countBusyPlace) {
+        if(countBusyPlace <= countPlace)
         this.countBusyPlace = countBusyPlace;
+        else System.out.println("countBusyPlace should not exceed then countPlace");
     }
 
-    public void setMaxDistance(int maxDistance) {
-        this.maxDistance = maxDistance;
-    }
 
-    public int getMaxDistance() {
+    public Integer getMaxDistance() {
         return maxDistance;
     }
 
@@ -45,10 +55,15 @@ public abstract class FreightAircraft implements Aircraft {
         return listPlace;
     }
 
+
     @Override
     public String toString() {
-        return "\n\n PassengerWagon | " +
-                "MaxDistance = " + maxDistance +
+        return "\n\n FreightAircraft | " +
+                " typeAircraft = " + TYPE_AIRCRAFT +
+                " | MaxDistance = " + maxDistance +
+                " | maxMassBaggage = " + maxMassBaggage +
+                " | allMassBaggage = " + allMassBaggage +
+                " | fuelConsumptionVolume = " + fuelConsumptionVolume +
                 " | countPlace = " + countPlace +
                 " | countBusyPlace = " + countBusyPlace;
     }
@@ -58,22 +73,40 @@ public abstract class FreightAircraft implements Aircraft {
     public int compareTo(FreightAircraft ob) {
         if(ob == null)
             return -1;
-        if(ob.getMaxDistance() == 0)
+        if(ob.getMaxDistance() == null)
             return -1;
 
-        return this.getMaxDistance() - ob.getMaxDistance();
+        return (int) this.getMaxDistance() -  ob.getMaxDistance();
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PassengerWagon that = (PassengerWagon) o;
+        FreightAircraft that = (FreightAircraft) o;
 
         if (countPlace != that.countPlace) return false;
-        if (typeWagon != null ? !typeWagon.equals(that.typeWagon) : that.typeWagon != null) return false;
+        if (countBusyPlace != that.countBusyPlace) return false;
+        if (Double.compare(that.allMassBaggage, allMassBaggage) != 0) return false;
+        if (maxDistance != that.maxDistance) return false;
+        if (fuelConsumptionVolume != that.fuelConsumptionVolume) return false;
         return listPlace != null ? listPlace.equals(that.listPlace) : that.listPlace == null;
 
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = countPlace;
+        result = 31 * result + countBusyPlace;
+        temp = Double.doubleToLongBits(allMassBaggage);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + maxDistance;
+        result = 31 * result + (listPlace != null ? listPlace.hashCode() : 0);
+        result = 31 * result + fuelConsumptionVolume;
+        return result;
     }
 }
