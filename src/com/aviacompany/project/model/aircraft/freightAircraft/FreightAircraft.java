@@ -1,10 +1,8 @@
-package com.aviacompany.project.model.aircraft;
+package com.aviacompany.project.model.aircraft.freightAircraft;
 
-import com.aviacompany.project.model.passenger.Baggage;
 import com.aviacompany.project.model.passenger.Place;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public abstract   class FreightAircraft implements Comparable<FreightAircraft> {
     protected int countPlace;
