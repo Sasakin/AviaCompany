@@ -36,6 +36,16 @@ public class Tu136 extends FreightAircraft implements Aircraft {
     }
 
     @Override
+    public int getFuel() {
+        return this.fuelConsumptionVolume;
+    }
+
+    @Override
+    public double getMaxMas() {
+        return this.maxMassBaggage;
+    }
+
+    @Override
     public String getTypeAircraft() {
         return this.TYPE_AIRCRAFT;
     }

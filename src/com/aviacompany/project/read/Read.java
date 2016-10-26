@@ -11,6 +11,10 @@ public class Read {
     String line;
     List<User> mass = new ArrayList<User>();
 
+    public List<User> getMass() {
+        return mass;
+    }
+
     public void reader() {
         BufferedReader readFromFile = null;
         try {

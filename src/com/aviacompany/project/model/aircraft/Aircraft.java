@@ -11,6 +11,13 @@ public interface Aircraft {
 
     public void loadPlace(Place place);  // загрузить самолет грузом или пасажирами
                                          // предполагается что груз или пасажир прикреплен к месту, а не наоборот
+    public int getFuel();
+
+    public double getMaxMas();
+
+    public int getCountPlace();
+
+    public int getCountBusyPlace();
 
     public  String getTypeAircraft();
 
