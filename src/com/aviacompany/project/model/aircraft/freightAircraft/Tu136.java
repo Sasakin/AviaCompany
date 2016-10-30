@@ -3,6 +3,8 @@ package com.aviacompany.project.model.aircraft.freightAircraft;
 import com.aviacompany.project.model.aircraft.Aircraft;
 import com.aviacompany.project.model.passenger.Place;
 
+import java.util.ArrayList;
+
 public class Tu136 extends FreightAircraft implements Aircraft {
 
     String route;
@@ -18,12 +20,13 @@ public class Tu136 extends FreightAircraft implements Aircraft {
 
     @Override
     public void loadPlace(Place place) {
+        if (listPlace==null) listPlace = new ArrayList<Place>();
         if ((countBusyPlace <= countPlace) && (place.getBaggage().getMas() <= maxMassBaggage / countPlace)) {      //если есть свободные
             place.setNumber(countBusyPlace++);                                                                     //места и масса груза
             this.listPlace.add(place);
             this.allMassBaggage+=place.getBaggage().getMas();                                                      //не превышает
         }                                                                                                         // допустимые значения
-        else System.out.println("Данный груз не соответствует требованиям");                                      // загружаем aircraft
+       /* else System.out.println("Данный груз не соответствует требованиям");     */                                 // загружаем aircraft
     }
     @Override
     public String getRoute() {
@@ -50,8 +53,4 @@ public class Tu136 extends FreightAircraft implements Aircraft {
         return this.TYPE_AIRCRAFT;
     }
 
-    @Override
-    public String toString() {
-        return this.toString() + " | route = " + this.getRoute();
-    }
 }

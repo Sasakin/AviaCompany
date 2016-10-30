@@ -3,7 +3,7 @@ package com.aviacompany.project.model.aviacompany;
 import com.aviacompany.project.model.aircraft.Aircraft;
 import com.aviacompany.project.model.aircraft.freightAircraft.An124;
 import com.aviacompany.project.model.aircraft.freightAircraft.Tu136;
-import com.aviacompany.project.model.aircraft.passengerAircraft.AirbusА380;
+import com.aviacompany.project.model.aircraft.passengerAircraft.Airbus380;
 import com.aviacompany.project.model.aircraft.passengerAircraft.Boeing747;
 import com.aviacompany.project.model.passenger.Baggage;
 import com.aviacompany.project.model.passenger.Passanger;
@@ -19,44 +19,32 @@ import java.util.Random;
 
 
 public class Aviacompany {
-    List<Aircraft> aircrafts;
+    private List<Aircraft> aircrafts = new ArrayList<>();
 
-    List<String> Routs;
+    private List<String> Routs;
 
     volatile Aircraft  aircraft;
+
+    public List<Aircraft> getAircrafts() {
+        return aircrafts;
+    }
 
     public void fillSendGoods()  throws IOException {
         Read test = new Read();
         test.reader();
         int i=0;
-        Iterator<Aircraft> itr = aircrafts.iterator();
         for (User newUser : test.getMass()) {    // создаем грузовые самолеты и задаем им путь
             newUser.chislo=i;
             if(i!=0){
-                if(itr.hasNext()){
-                    aircraft = itr.next();
-                    aircraft.setRoute(newUser.key);
-                }
-                else {
-                    (new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            aircraft = new Tu136();
-                        }
-                    })).start();
-                    (new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            aircraft = new An124();
-                        }
-                    })).start();
-                    aircraft.setRoute(newUser.key);
-                }
+                        aircraft = new An124();
+                        aircraft.setRoute(newUser.key);
+                        aircrafts.add(aircraft);
+                        System.out.println(aircraft);
             }
             i++;
         }
         for(Aircraft a:aircrafts) {                                // загружаем самолет грузом
-            while (a.getCountBusyPlace()<=a.getCountPlace()) {
+            while (a.getCountBusyPlace()<a.getCountPlace()) {
                 Place place = new Place(new Baggage(Math.random() * a.getMaxMas()));
                 a.loadPlace(place);
             }
@@ -68,34 +56,17 @@ public class Aviacompany {
         test.reader();
         int i=0;
         Random random = new Random();
-        Iterator<Aircraft> itr = aircrafts.iterator();
-        for (User newUser : test.getMass()) {    // создаем грузовые самолеты и задаем им путь
+        for (User newUser : test.getMass()) {     // создаем грузовые самолеты и задаем им путь
             newUser.chislo=i;
             if(i!=0){
-                if(itr.hasNext()){
-                    aircraft = itr.next();
+                    aircraft = new Boeing747();
                     aircraft.setRoute(newUser.key);
-                }
-                else {
-                    (new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            aircraft = new AirbusА380();
-                        }
-                    })).start();
-                    (new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            aircraft = new Boeing747();
-                        }
-                    })).start();
-                    aircraft.setRoute(newUser.key);
-                }
+                    aircrafts.add(aircraft);
             }
             i++;
         }
         for(Aircraft a:aircrafts) {                                // загружаем самолет грузом
-            while (a.getCountBusyPlace()<=a.getCountPlace()) {
+            while (a.getCountBusyPlace()<a.getCountPlace()) {
                 Place place = new Place(new Baggage(Math.random() * a.getMaxMas())
                 , new Passanger(random.nextBoolean()));
                 a.loadPlace(place);
@@ -109,5 +80,12 @@ public class Aviacompany {
                 return aircraft;
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer res = new StringBuffer();
+         for(Aircraft a:aircrafts) res.append(a.toString()+" route " + a.getRoute());
+        return res.toString();
     }
 }

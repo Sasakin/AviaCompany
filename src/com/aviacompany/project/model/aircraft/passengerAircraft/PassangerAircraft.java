@@ -1,7 +1,5 @@
 package com.aviacompany.project.model.aircraft.passengerAircraft;
 
-import com.aviacompany.project.model.aircraft.freightAircraft.FreightAircraft;
-import com.aviacompany.project.model.passenger.Passanger;
 import com.aviacompany.project.model.passenger.Place;
 
 import java.util.ArrayList;
@@ -36,6 +34,8 @@ public abstract class PassangerAircraft  implements Comparable<PassangerAircraft
         return countBusyPlace;
     }
 
+    abstract String getRoute();
+
     public void setCountBusyPlace(int countBusyPlace) {
         if(countBusyPlace <= countPlace)
             this.countBusyPlace = countBusyPlace;
@@ -59,6 +59,7 @@ public abstract class PassangerAircraft  implements Comparable<PassangerAircraft
     @Override
     public String toString() {
         return "\n\n PassangerAircraft | " +
+                " | route = " + this.getRoute()+
                 " typeAircraft = " + TYPE_AIRCRAFT +
                 " | MaxDistance = " + maxDistance +
                 " | maxMassBaggage = " + maxMassBaggage +

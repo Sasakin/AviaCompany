@@ -53,10 +53,12 @@ public abstract   class FreightAircraft implements Comparable<FreightAircraft> {
         return listPlace;
     }
 
+    abstract String getRoute();
 
     @Override
     public String toString() {
         return "\n\n FreightAircraft | " +
+                " | route = " + this.getRoute()+
                 " typeAircraft = " + TYPE_AIRCRAFT +
                 " | MaxDistance = " + maxDistance +
                 " | maxMassBaggage = " + maxMassBaggage +

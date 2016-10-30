@@ -3,10 +3,12 @@ package com.aviacompany.project.model.aircraft.passengerAircraft;
 import com.aviacompany.project.model.aircraft.Aircraft;
 import com.aviacompany.project.model.passenger.Place;
 
-public class AirbusА380 extends PassangerAircraft implements Aircraft {
+import java.util.ArrayList;
+
+public class Airbus380 extends PassangerAircraft implements Aircraft {
     String route;
 
-    public AirbusА380() {
+    public Airbus380() {
         this.countPlace = 50;                    // кол-во мест для груза
         this.maxDistance = 15000;                  // в километрах
         this.fuelConsumptionVolume = 250000;      // макс. масса топлива в килограммах
@@ -17,6 +19,7 @@ public class AirbusА380 extends PassangerAircraft implements Aircraft {
 
     @Override
     public void loadPlace(Place place) {
+        if (listPlace==null) listPlace = new ArrayList<Place>();
         if ((countBusyPlace <= countPlace) &&
                 (place.getBaggage().getMas() <= maxMassBaggage / countPlace)
                 && (place.getPassanger().isHaveTicket()==true)) {                                                 //если есть свободные
@@ -24,7 +27,7 @@ public class AirbusА380 extends PassangerAircraft implements Aircraft {
             this.listPlace.add(place);
             this.allMassBaggage+=place.getBaggage().getMas();                                                      //не превышает
         }                                                                                                         // допустимые значения
-        else System.out.println("Пассажир не может пройти билетный контроль");                                      // загружаем aircraft
+        /*else System.out.println("Пассажир не может пройти билетный контроль");      */                                // загружаем aircraft
     }
     @Override
     public String getRoute() {
@@ -49,10 +52,5 @@ public class AirbusА380 extends PassangerAircraft implements Aircraft {
     @Override
     public String getTypeAircraft() {
         return this.TYPE_AIRCRAFT;
-    }
-
-    @Override
-    public String toString() {
-        return this.toString() + " | route = " + this.getRoute();
     }
 }

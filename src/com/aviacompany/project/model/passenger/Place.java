@@ -6,6 +6,11 @@ public class Place {
     private Passanger passanger;
 
     // конструктор для пассажирского самолета
+    public Place() {
+        this.baggage = new Baggage(0);
+        this.passanger = new Passanger(true);
+    }
+
     public Place(Baggage baggage, Passanger passanger) {
         this.baggage = baggage;
         this.passanger = passanger;

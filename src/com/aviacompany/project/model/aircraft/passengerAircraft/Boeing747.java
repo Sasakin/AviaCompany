@@ -3,6 +3,8 @@ package com.aviacompany.project.model.aircraft.passengerAircraft;
 import com.aviacompany.project.model.aircraft.Aircraft;
 import com.aviacompany.project.model.passenger.Place;
 
+import java.util.ArrayList;
+
 /**
  * Created by Student on 25.10.2016.
  */
@@ -20,6 +22,7 @@ public class Boeing747 extends PassangerAircraft implements Aircraft {
 
     @Override
     public void loadPlace(Place place) {
+        if (listPlace==null) listPlace = new ArrayList<Place>();
         if ((countBusyPlace <= countPlace) &&
                 (place.getBaggage().getMas() <= maxMassBaggage / countPlace)
                 && (place.getPassanger().isHaveTicket()==true)) {                                                 //если есть свободные
@@ -54,9 +57,5 @@ public class Boeing747 extends PassangerAircraft implements Aircraft {
         return this.TYPE_AIRCRAFT;
     }
 
-    @Override
-    public String toString() {
-        return this.toString() + " | route = " + this.getRoute();
-    }
 }
 
