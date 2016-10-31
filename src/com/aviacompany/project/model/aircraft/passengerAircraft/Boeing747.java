@@ -30,7 +30,7 @@ public class Boeing747 extends PassangerAircraft implements Aircraft {
             this.listPlace.add(place);
             this.allMassBaggage+=place.getBaggage().getMas();                                                      //не превышает
         }                                                                                                         // допустимые значения
-        else System.out.println("Пассажир не может пройти билетный контроль");                                      // загружаем aircraft
+        //else System.out.println("Пассажир не может пройти билетный контроль");                                      // загружаем aircraft
     }
     @Override
     public String getRoute() {
