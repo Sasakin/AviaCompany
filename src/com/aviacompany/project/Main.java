@@ -11,6 +11,6 @@ public class Main {
     public static void main(String args[]) {
         Controller controller = new Controller();
         controller.startProgramm();
-        System.out.println("Список самолетов: "+ controller.getAviacompany().getAircrafts());
+        //System.out.println("Список самолетов: "+ controller.getAviacompany().getAircrafts());
     }
 }

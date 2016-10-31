@@ -19,7 +19,7 @@ public class Controller extends View {
     private Scanner scanner = new Scanner(System.in);
 
     public void startProgramm(){
-        while (userChoice!=4) {
+        while (userChoice!=5) {
             for (int i = 0; i < 100; i++)
                 System.out.print("-");
             System.out.println(" ");
@@ -30,7 +30,8 @@ public class Controller extends View {
             System.out.println("1. Пассажирский рейс");
             System.out.println("2. Отправить груз");
             System.out.println("3. Список самолетов");
-            System.out.println("4. Выход");
+            System.out.println("4. Показать рейсы");
+            System.out.println("5. Выход");
             userChoice = scanner.nextInt();
             if(userChoice==2) {
                 try {
@@ -63,7 +64,22 @@ public class Controller extends View {
                 }
             }
             if(userChoice == 3) {
+                for (int i = 0; i < 100; i++)
+                    System.out.print("-");
+                System.out.println(" ");
                 System.out.println(aviacompany.getAircrafts());
+                for (int i = 0; i < 100; i++)
+                    System.out.print("-");
+                System.out.println(" ");
+            }
+            if(userChoice == 4) {
+                for (int i = 0; i < 100; i++)
+                    System.out.print("-");
+                System.out.println(" ");
+                aviacompany.showRout();
+                for (int i = 0; i < 100; i++)
+                    System.out.print("-");
+                System.out.println(" ");
             }
         }
     }

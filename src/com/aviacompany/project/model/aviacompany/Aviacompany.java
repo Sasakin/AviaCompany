@@ -74,6 +74,19 @@ public class Aviacompany {
         }
     }
 
+    public void showRout() {
+        Read test = new Read();
+        test.reader();
+        int i=0;
+        for (User newUser : test.getMass()) {
+            newUser.chislo=i;
+            if(i!=0){
+                System.out.println(i + ". "+newUser.key);
+            }
+            i++;
+        }
+    }
+
     Aircraft serchAircraftByFuel(int maxFuel, int minFuel) {
         for(Aircraft aircraft:aircrafts){
             if(aircraft.getFuel()<maxFuel && aircraft.getFuel()>minFuel)
